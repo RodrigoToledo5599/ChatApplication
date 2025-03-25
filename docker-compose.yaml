@@ -1,0 +1,36 @@
+services:
+  app:
+    container_name: ChatApp
+    build: ./ChatApp
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ChatApp/:/var/www/html
+      - /var/www/html/vendor            # Exclude vendor directory from the host mount
+      - /var/www/html/storage          # Exclude storage directory from the host mount
+    depends_on:
+      - db
+    networks:
+      - chat-app-network
+
+  db:
+    container_name: ChatAppDB
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: ChatApp
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - chat-app-network
+
+networks:
+  chat-app-network:
+    external: true
+    name: chat-app-network
+
+volumes:
+  mysql_data:
