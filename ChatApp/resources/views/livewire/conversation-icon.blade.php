@@ -1,7 +1,7 @@
 <style>
     
     .conversation-icon{
-        width:27vw;
+        width:25vw;
         height:10vh;
         /* background-color: blue; */
 
@@ -37,5 +37,7 @@
     <div class="img-space">
         <img src="{{ asset('img/account-circle.svg')}}" alt="">
     </div>
-    <h4>Nome do contatinho</h4>
+    <div>
+        <h4>Name: {{$user->name}}</h4>
+    </div>
 </div>

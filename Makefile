@@ -36,10 +36,13 @@ db-create:
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'DROP DATABASE IF EXISTS ChatAppDB;'"
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'CREATE DATABASE ChatAppDB;'"
 
-db-seed:
-	docker exec ChatApp php artisan migrate
+db-migrate:
+	# docker exec ChatApp php artisan migrate
 	# docker exec ChatApp php artisan passport:install
+
+db-seed:
 	# docker exec ChatApp php artisan db:seed --class=
+	docker exec ChatApp php artisan db:seed
 	
 redis-start:
 	docker run -d --name redis-stack --network=chat-app-network -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
@@ -53,6 +56,7 @@ do-it-all: # build it all
 	@make up
 	@make dependencies
 	@make db-create
+	@make db-migrate
 	@make db-seed
 
 
@@ -61,3 +65,9 @@ do-it-all: # build it all
 
 see-all-dbs:
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'SHOW DATABASES;'"
+
+see-tables:
+	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; SHOW TABLES;'"
+
+see-users:
+	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; SELECT * FROM users;'"

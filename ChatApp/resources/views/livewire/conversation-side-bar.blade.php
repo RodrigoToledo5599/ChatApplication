@@ -1,6 +1,6 @@
 <style>
     .conversation-side-bar{
-        width:30vw;
+        width:25vw;
         height:85vh;
         display:flex;
         flex-direction: column;
@@ -13,8 +13,8 @@
 
 <div class="conversation-side-bar">
 
-    @for($i=0; $i<=4; $i++)
-        <livewire:conversation-icon />
-    @endfor
+    @foreach($users as $usuario)
+        <livewire:conversation-icon :user="$usuario"/>
+    @endforeach
 
 </div>

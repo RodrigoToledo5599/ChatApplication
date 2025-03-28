@@ -57,12 +57,19 @@
 
 .conversation-screen .campo-de-mensagem .enviar-mensagem button{
     background: none; 
-    border: none; 
+    border: 0;
     padding: 0;
     font: inherit; 
     cursor: pointer; 
     outline: none;
 }
+
+.conversation-screen .campo-de-mensagem .enviar-mensagem button :hover{
+    border: 5px black solid;
+    border-radius: 50%; 
+    /* background: blue;  */
+}
+
 </style>
 
 
@@ -73,7 +80,7 @@
 
 <div class="conversation-screen">
     <div class="conversation">
-
+        <h1>conversation</h1>
     </div>
 
     <div class="campo-de-mensagem">

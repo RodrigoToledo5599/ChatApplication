@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sender_id');
@@ -18,7 +20,7 @@ return new class extends Migration
             $table->foreign('sender_id')->references('id')->on('users');
             $table->foreign('receiver_id')->references('id')->on('users');
             $table->timestamp('last_time_message')->nullable();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

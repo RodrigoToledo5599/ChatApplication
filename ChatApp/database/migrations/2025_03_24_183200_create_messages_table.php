@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -22,7 +24,7 @@ return new class extends Migration
             $table->boolean('read')->default(0)->nullable();
             $table->text('body')->nullable();
             $table->string('type')->nullable();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 
