@@ -1,5 +1,4 @@
 <style>
-    
     .conversation-icon{
         width:25vw;
         height:10vh;
@@ -22,11 +21,18 @@
 
     .conversation-icon .img-space{
         width:6vw;
-        
         display:flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
+
+    }
+
+    .conversation .name-space{
+        width:19vw;
+        overflow-x: auto;
+        word-wrap: break-word;
+        /* overflow-wrap: break-word; */
     }
 
 
@@ -37,7 +43,7 @@
     <div class="img-space">
         <img src="{{ asset('img/account-circle.svg')}}" alt="">
     </div>
-    <div>
-        <h4>Name: {{$user->name}}</h4>
+    <div class="name-space">
+        <h4>{{$user->name}}</h4>
     </div>
 </div>

@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Conversation extends Component
+class MessageRow extends Component
 {
     public function render()
     {
-        return view('livewire.conversation');
+        return view('livewire.message-row');
     }
 }

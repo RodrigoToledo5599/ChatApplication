@@ -16,14 +16,19 @@
             padding-top: 3vh;
             width: 100vw;
             height: 100vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
         }
     </style>
     @livewireStyles
 </head>
 <body>
-    <div class="home-page-content d-flex justify-content-center flex-row">
+    <div class="home-page-content">
         <livewire:conversation-side-bar />
-        <livewire:conversation />
+        {{-- <livewire:conversation-box receiverId= "0" /> --}}
+        <livewire:conversation-box/>
     </div>
     
 

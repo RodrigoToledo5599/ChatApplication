@@ -15,7 +15,6 @@ class Conversation extends Model
         'sender_id',
         'receiver_id',
         'last_time_message'
-         
     ];
 
 

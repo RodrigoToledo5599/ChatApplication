@@ -1,8 +1,4 @@
 <style>
-    :root{
-        /* -- */
-    }
-
     .conversation-screen{
     height:100vh; 
     width:70vw;
@@ -16,17 +12,20 @@
     width: 68vw;
     height: 80vh;
     border:solid 1px black;
+    /* background-color: blue;   */
     border-radius: 16px;
 }
 
 .conversation-screen .campo-de-mensagem{
     width: 68vw;
-    height: 10vh;
+    height: 20vh;
     
     display:flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+
+    
     
 }
 
@@ -65,9 +64,9 @@
 }
 
 .conversation-screen .campo-de-mensagem .enviar-mensagem button :hover{
-    border: 5px black solid;
-    border-radius: 50%; 
-    /* background: blue;  */
+    /* transition:2s;  */
+    width:70px;
+    height:70px;
 }
 
 </style>
@@ -88,7 +87,7 @@
             <input type="text" name="message" id="message">
         </div>
         <div class="enviar-mensagem">
-            <button><img src="{{ asset('img/send-msg-arrow.svg')}}" alt=""></button>
+            <button><img src="{{ asset('img/paper-plane.svg')}}" alt=""></button>
         </div>
 
     </div>

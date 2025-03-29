@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Conversation;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -53,6 +56,18 @@ class DatabaseSeeder extends Seeder
             'email' => 'igor@gmail.com',
             'password' => '123'
         ]);
+
+        DB::table('conversations')->insert([
+            [
+                'sender_id' => 1,
+                'receiver_id' => 3,
+                'last_time_message' => Carbon::now()->subSeconds(3),
+            ],
+        ]);
+
+
+
+        
         
     }
 }

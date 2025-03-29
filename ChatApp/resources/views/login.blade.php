@@ -16,7 +16,6 @@
             flex-direction:column;
             justify-content:space-between;
             align-items:center;
-
         }
         .card .card-body .submit .error-msg{
             color:red;

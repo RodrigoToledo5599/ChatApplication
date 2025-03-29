@@ -71,3 +71,9 @@ see-tables:
 
 see-users:
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; SELECT * FROM users;'"
+
+see-auth-tokens:
+	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; SELECT * FROM personal_access_tokens;'"
+
+delete-auth-tokens:
+	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; DELETE FROM personal_access_tokens;'"
