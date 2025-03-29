@@ -27,7 +27,7 @@
 <body>
     <div class="home-page-content">
         <livewire:conversation-side-bar />
-        {{-- <livewire:conversation-box receiverId= "0" /> --}}
+        {{-- <livewire:conversation-box :receiverId= "0" /> --}}
         <livewire:conversation-box/>
     </div>
     

@@ -24,7 +24,7 @@ class AuthController extends Controller
             return view('login',["message" => ErrorMessages::SenhaEOuEmailNulo]);
         }
         $result = $this->auth_service->CreateAuthToken($email,$password);
-        if($result == ErrorMessages::AuthenticationError){
+        if($result["token"] == ErrorMessages::AuthenticationError){
             return view('login',["message" => ErrorMessages::AuthenticationError]);
         }
         $request->session()->start();

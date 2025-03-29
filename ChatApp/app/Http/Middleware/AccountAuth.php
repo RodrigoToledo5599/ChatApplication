@@ -25,7 +25,7 @@ class AccountAuth
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         $token = $request->session()->get('auth_token');
-        if(auth()->check()){
+        if(Auth::check()){
             return $next($request);
         }
     }
