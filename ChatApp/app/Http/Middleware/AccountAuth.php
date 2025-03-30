@@ -20,7 +20,7 @@ class AccountAuth
         }
         $accessToken = PersonalAccessToken::findToken($token);
         if (!$accessToken) {
-            return response()->json(['message' => 'Unauthorized: Invalid token'], 401);
+            return response()->json(['message' => ErrorMessages::SessionExpiradaOuNaoExistente], 401);
         }
         return $next($request);
     }
