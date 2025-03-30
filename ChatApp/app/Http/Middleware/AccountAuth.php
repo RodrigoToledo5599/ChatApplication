@@ -3,30 +3,25 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
+use App\Enum\ErrorMessages;
+use Auth;
 
 class AccountAuth
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    // public function handle(Request $request, Closure $next): Response
-    // {
-    //     return $next($request);
-    // }
-
+  
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->session()->has('auth_token')) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
         $token = $request->session()->get('auth_token');
-        if(Auth::check()){
-            return $next($request);
+        if (!$token){
+            return response()->json(['message' => ErrorMessages::SessionExpiradaOuNaoExistente], 401);
         }
+        $accessToken = PersonalAccessToken::findToken($token);
+        if (!$accessToken) {
+            return response()->json(['message' => 'Unauthorized: Invalid token'], 401);
+        }
+        return $next($request);
     }
 }

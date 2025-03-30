@@ -43,10 +43,21 @@ db-migrate:
 db-seed:
 	# docker exec ChatApp php artisan db:seed --class=
 	docker exec ChatApp php artisan db:seed
-	
+
+clear-all:
+	docker exec ChatApp php artisan cache:clear
+	docker exec ChatApp php artisan config:clear
+	docker exec ChatApp php artisan route:clear
+	docker exec ChatApp php artisan view:clear
+
+
+
+
 redis-start:
 	docker run -d --name redis-stack --network=chat-app-network -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
 	docker exec -it redis-stack redis-cli
+
+
 
 
 

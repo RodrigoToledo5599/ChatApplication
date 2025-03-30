@@ -24,12 +24,12 @@ class AuthController extends Controller
             return view('login',["message" => ErrorMessages::SenhaEOuEmailNulo]);
         }
         $result = $this->auth_service->CreateAuthToken($email,$password);
-        if($result["token"] == ErrorMessages::AuthenticationError){
+        if($result == ErrorMessages::TokenCouldNotBeCreated){
             return view('login',["message" => ErrorMessages::AuthenticationError]);
         }
         $request->session()->start();
-        $request->session()->put('auth_token', $result["token"]);
+        $request->session()->put('auth_token', $result);
 
-        return view('home');
+        return redirect('/home');
     }   
 }
