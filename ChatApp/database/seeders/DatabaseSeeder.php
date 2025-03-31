@@ -73,6 +73,14 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+        DB::table('conversations')->insert([
+            [
+                'sender_id' => 1,
+                'receiver_id' => 4,
+                'last_time_message' => Carbon::now()->subSeconds(3),
+            ],
+        ]);
+
         DB::table('messages')->insert([
             [
                 'sender_id' => 1,

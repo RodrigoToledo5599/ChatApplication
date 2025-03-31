@@ -13,21 +13,15 @@ class ConversationBox extends Component
 {
     public $receiverId;
     public $conversationMessages;
+    public $conversationId;
 
-    public function mount($receiverId=1, $conversationMessages=[])
+    public function mount($receiverId=1, $conversationMessages=[], $conversationId=0)
     {
         $this->receiverId = $receiverId;
     }
 
-    public function loadConversation() {
-        // dd(Auth::user()->id);
-        $result = Conversation::where('receiver_id',Auth::user()->id)->where('sender_id',$this->receiverId)->orWhere('receiver_id',$this->receiverId)->where('sender_id',Auth::user()->id)->first();
-        $result == null ? "null" : $result;
-        return $result;
-    }
-
     public function loadConversationMessages($conversationId): void{
-        $this->conversationMessages = DB::table('messages')->where('conversation_id',$conversationId)->get();
+        $this->conversationMessages = DB::table('messages')->where('conversation_id',$this->conversationId)->get();
         if(!isset($this->conversationMessages[0])){
             $this->conversationMessages = [];
         }
@@ -42,10 +36,8 @@ class ConversationBox extends Component
                 "message" => "selecione a conversa no menu ao lado",
             ]);
         }
-        $conversation = $this->loadConversation();
-        $this->loadConversationMessages($conversation->id);
-        // dd($this->conversationMessages == []);
-    
+        $this->loadConversationMessages(2);
+     
         return view('livewire.conversation-box',[
             "receiverId" => $this->receiverId,
             "message" => "Nenhuma Mensagem ainda",
