@@ -81,11 +81,14 @@
 <div class="conversation-screen">
     <div class="conversation">
         @if($receiverId != 0)
-            @foreach($conversationMessages as  $mensagem)
-                <p>{{$mensagem->body}}</p>
-            @endforeach
+            @if($conversationMessages == [])
+                <p>nenhuma mensagem ainda nessa conversa</p>
+            @else
+                @foreach($conversationMessages as $mensagem)
+                    <p>{{$mensagem->body}}</p>
+                @endforeach
+            @endif
         @endif
-        
     </div>
 
     <div class="campo-de-mensagem">

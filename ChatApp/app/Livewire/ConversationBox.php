@@ -20,6 +20,7 @@ class ConversationBox extends Component
     }
 
     public function loadConversation() {
+        // dd(Auth::user()->id);
         $result = Conversation::where('receiver_id',Auth::user()->id)->where('sender_id',$this->receiverId)->orWhere('receiver_id',$this->receiverId)->where('sender_id',Auth::user()->id)->first();
         $result == null ? "null" : $result;
         return $result;
@@ -27,6 +28,9 @@ class ConversationBox extends Component
 
     public function loadConversationMessages($conversationId): void{
         $this->conversationMessages = DB::table('messages')->where('conversation_id',$conversationId)->get();
+        if(!isset($this->conversationMessages[0])){
+            $this->conversationMessages = [];
+        }
     }
 
 
@@ -40,19 +44,15 @@ class ConversationBox extends Component
         }
         $conversation = $this->loadConversation();
         $this->loadConversationMessages($conversation->id);
-
-        if($this->conversationMessages == []){
-            return view('livewire.conversation-box',[
-                "receiverId" => $this->receiverId,
-                "message" => "Nenhuma Mensagem ainda",
-                "conversationMessages" => $this->conversationMessages,
-            ]);
-        }
+        // dd($this->conversationMessages == []);
+    
         return view('livewire.conversation-box',[
             "receiverId" => $this->receiverId,
-            "message" => "",
+            "message" => "Nenhuma Mensagem ainda",
             "conversationMessages" => $this->conversationMessages,
         ]);
+        
+        
 
     }
 }
