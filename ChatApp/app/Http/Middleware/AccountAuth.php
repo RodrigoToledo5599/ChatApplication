@@ -14,13 +14,13 @@ class AccountAuth
   
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->session()->get('auth_token');
+        $token = session()->get('auth_token');
         if (!$token){
-            return response()->json(['message' => ErrorMessages::SessionExpiradaOuNaoExistente], 401);
+            return response()->json(['message' => ErrorMessages::SessionExpiradaOuTokenNaoExistente], 401);
         }
         $accessToken = PersonalAccessToken::findToken($token);
         if (!$accessToken) {
-            return response()->json(['message' => ErrorMessages::SessionExpiradaOuNaoExistente], 401);
+            return response()->json(['message' => ErrorMessages::SessionExpiradaOuTokenNaoExistente], 401);
         }
         return $next($request);
     }

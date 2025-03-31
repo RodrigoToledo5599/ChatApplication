@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     {{-- <link href="{{ asset('css/livewire/conversation-side-bar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/livewire/conversation.css') }}" rel="stylesheet"> --}}
+    @livewireStyles
     <style>
         body{
             padding:0
@@ -22,12 +23,12 @@
             align-items: center;
         }
     </style>
-    @livewireStyles
+    
 </head>
 <body>
     <div class="home-page-content">
         <livewire:conversation-side-bar />
-        {{-- <livewire:conversation-box :receiverId= "0" /> --}}
+        {{-- <livewire:conversation-box :receiverId=5 /> --}}
         <livewire:conversation-box/>
     </div>
     

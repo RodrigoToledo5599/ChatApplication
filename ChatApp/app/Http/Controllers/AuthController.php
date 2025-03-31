@@ -27,8 +27,8 @@ class AuthController extends Controller
         if($result == ErrorMessages::TokenCouldNotBeCreated){
             return view('login',["message" => ErrorMessages::AuthenticationError]);
         }
-        $request->session()->start();
-        $request->session()->put('auth_token', $result);
+        // $request->session()->start();
+        session()->put('auth_token', $result);
 
         return redirect('/home');
     }   

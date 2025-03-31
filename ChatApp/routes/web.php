@@ -9,7 +9,10 @@ Route::get('/', function () {
         "message"=> ""
     ]);
 });
+
 Route::get('/home', function () {
     return view("/home");
 })->middleware(AccountAuth::class);
+
+
 Route::post('/login-user', [AuthController::class,'Login']);

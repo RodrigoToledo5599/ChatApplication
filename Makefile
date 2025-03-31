@@ -13,6 +13,9 @@ up:
 app-up:
 	docker-compose up app -d
 
+app2-up:
+	docker-compose up app2 -d
+
 down:
 	docker-compose down app
 	docker-compose down db
@@ -23,14 +26,26 @@ app-down:
 app-run:
 	docker-compose exec app php artisan serve --host 0.0.0.0 --port 8000
 
+app-run-2:
+	docker-compose exec app2 php artisan serve --host 0.0.0.0 --port 8002
+
 dependencies:
 	docker exec ChatApp composer update
 	docker exec ChatApp composer require predis/predis
 	docker exec ChatApp composer require livewire/livewire
 	docker exec ChatApp php artisan livewire:publish --config
-	# docker exec ChatApp composer require laravel/reverb
-	# docker exec ChatApp php artisan reverb:install
 	docker exec ChatApp composer install
+
+dependencies2:
+	docker exec ChatApp2 composer update
+	docker exec ChatApp2 composer require predis/predis
+	docker exec ChatApp2 composer require livewire/livewire
+	docker exec ChatApp2 php artisan livewire:publish --config
+	docker exec ChatApp2 composer install
+
+redis-start:
+	# docker run -d --name redis-stack --network=chat-app-network -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+	docker exec -it redis-stack redis-cli
 
 db-create:
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'DROP DATABASE IF EXISTS ChatAppDB;'"
@@ -71,8 +86,7 @@ do-it-all: # build it all
 	@make db-seed
 
 
-
-# utils for docker and mysql
+# db queries: ==============================================================================================================
 
 see-all-dbs:
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'SHOW DATABASES;'"
@@ -88,3 +102,16 @@ see-auth-tokens:
 
 delete-auth-tokens:
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; DELETE FROM personal_access_tokens;'"
+
+see-sessions:
+	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; SELECT * FROM sessions;'"
+
+delete-sessions:
+	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; DELETE FROM sessions;'"
+
+see-conversations:
+	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; SELECT * FROM conversations;'"
+
+
+see-messages:
+	docker-compose exec db sh -c "mysql -u root -p'password' -e 'USE ChatAppDB; SELECT * FROM messages;'"

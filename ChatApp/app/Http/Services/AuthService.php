@@ -13,6 +13,7 @@ class AuthService {
     public function CreateAuthToken($email, $password){
         if (Auth::attempt(["email" => $email, "password" => $password])) {
             $token = Auth::user()->createToken('auth_token')->plainTextToken;
+            // return ["token_criado" => $token];
             return $token;
         }
         return ErrorMessages::TokenCouldNotBeCreated;

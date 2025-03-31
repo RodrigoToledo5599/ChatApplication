@@ -44,6 +44,8 @@
         <img src="{{ asset('img/account-circle.svg')}}" alt="">
     </div>
     <div class="name-space">
-        <h4>{{$user->name}}</h4>
+        {{-- {{dd($user)}} --}}
+        <h4>{{$user->name}} - Id: {{$user->id}}</h4>
+        <h4>{{$user->email}}</h4>
     </div>
 </div>

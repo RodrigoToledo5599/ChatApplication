@@ -7,7 +7,20 @@ services:
     volumes:
       - ./ChatApp/:/var/www/html
       - /var/www/html/vendor            # Exclude vendor directory from the host mount
-      - /var/www/html/storage          # Exclude storage directory from the host mount
+      - /var/www/html/storage           # Exclude storage directory from the host mount
+    depends_on:
+      - db
+    networks:
+      - chat-app-network
+  app2:
+    container_name: ChatApp2
+    build: ./ChatApp
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./ChatApp/:/var/www/html
+      - /var/www/html/vendor            # Exclude vendor directory from the host mount
+      - /var/www/html/storage           # Exclude storage directory from the host mount
     depends_on:
       - db
     networks:

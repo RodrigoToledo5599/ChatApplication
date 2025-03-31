@@ -14,6 +14,10 @@
     border:solid 1px black;
     /* background-color: blue;   */
     border-radius: 16px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 .conversation-screen .campo-de-mensagem{
@@ -24,9 +28,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-
-    
-    
 }
 
 .conversation-screen .campo-de-mensagem .mensagem{
@@ -63,7 +64,7 @@
     outline: none;
 }
 
-.conversation-screen .campo-de-mensagem .enviar-mensagem button :hover{
+.conversation-screen .campo-de-mensagem .enviar-mensagem button:hover{
     /* transition:2s;  */
     width:70px;
     height:70px;
@@ -79,7 +80,12 @@
 
 <div class="conversation-screen">
     <div class="conversation">
-        <h1>conversation</h1>
+        @if($receiverId != 0)
+            @foreach($conversationMessages as  $mensagem)
+                <p>{{$mensagem->body}}</p>
+            @endforeach
+        @endif
+        
     </div>
 
     <div class="campo-de-mensagem">
