@@ -18,7 +18,7 @@ class ConversationSideBar extends Component
         $this->users = $users;
     }
 
-    public function loadConversations() {
+    public function loadConversations(){
         $this->conversations = Conversation::where('receiver_id',Auth::user()->id)->orWhere('sender_id',Auth::user()->id)->get();
         foreach($this->conversations as $conversation){
             if($conversation->receiver_id == Auth::user()->id){
@@ -29,6 +29,12 @@ class ConversationSideBar extends Component
             }
         }
     }
+
+
+    public function loadConversationForTheConversationBoxComponent($conversationId){
+        
+    }
+
 
     public function render()
     {
