@@ -38,12 +38,11 @@ class ConversationSideBar extends Component
 
     public function render()
     {
-        $auth_user = Auth::user();
         $this->loadConversations();
         $users = User::where('id', '!=', Auth::user()->id)->get();
         
         return view('livewire.conversation-side-bar',[
-            'auth_user' => $auth_user,
+            'auth_user' => Auth::user(),
             'user_names' => $users,
         ]);
     }

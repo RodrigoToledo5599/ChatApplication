@@ -16,4 +16,9 @@ class ConversationIcon extends Component
             'user' => $this->user
         ]);
     }
+
+
+    public function UpdateConversationBox($user_id){
+        
+    }
 }

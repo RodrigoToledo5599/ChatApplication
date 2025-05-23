@@ -33,6 +33,7 @@ dependencies:
 	docker exec ChatApp composer update
 	docker exec ChatApp composer require predis/predis
 	docker exec ChatApp composer require livewire/livewire
+	docker exec ChatApp php artisan install:broadcasting
 	docker exec ChatApp php artisan livewire:publish --config
 	docker exec ChatApp composer install
 
@@ -43,16 +44,12 @@ dependencies2:
 	docker exec ChatApp2 php artisan livewire:publish --config
 	docker exec ChatApp2 composer install
 
-redis-start:
-	# docker run -d --name redis-stack --network=chat-app-network -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
-	docker exec -it redis-stack redis-cli
-
 db-create:
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'DROP DATABASE IF EXISTS ChatAppDB;'"
 	docker-compose exec db sh -c "mysql -u root -p'password' -e 'CREATE DATABASE ChatAppDB;'"
 
 db-migrate:
-	# docker exec ChatApp php artisan migrate
+	docker exec ChatApp php artisan migrate
 	# docker exec ChatApp php artisan passport:install
 
 db-seed:
@@ -66,19 +63,25 @@ clear-all:
 	docker exec ChatApp php artisan view:clear
 
 
-
-
 redis-start:
 	docker run -d --name redis-stack --network=chat-app-network -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
 	docker exec -it redis-stack redis-cli
 
 
 
+download-ws:
+	docker run -p 6001:6001 -p 9601:9601 -d --name=websocket --network=chat-app-network quay.io/soketi/soketi:1.4-16-debian
+start-ws:
+	docker start websocket
+stop-ws:
+	docker stop websocket
+
+
 
 
 do-it-all: # build it all
-	@make build
-	@make create-network
+	# @make build
+	# @make create-network
 	@make up
 	@make dependencies
 	@make db-create
